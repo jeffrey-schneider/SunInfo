@@ -62,11 +62,16 @@ namespace SunInfo
 
         private static String DisplayInformation(SunModel sunInfo)
         {
+            string hours = sunInfo.Day_length.Split(':')[0];
+            string minutes = sunInfo.Day_length.Split(':')[1];
+            string seconds = sunInfo.Day_length.Split(':')[2];
+
             StringBuilder sunNotice = new StringBuilder();            
             sunNotice.AppendLine($"Sunrise is at { sunInfo.Sunrise.ToLocalTime().ToLongTimeString() }");
             sunNotice.AppendLine($"Sunset is at { sunInfo.Sunset.ToLocalTime().ToLongTimeString()}");
             sunNotice.AppendLine($"Solar Noon is at { sunInfo.Solar_noon.ToLocalTime().ToLongTimeString()}");
-            sunNotice.AppendLine($"Day Length is at { sunInfo.Day_length.ToLocalTime().ToLongTimeString()}");
+            
+            sunNotice.AppendLine($"Day Length is Hrs: {hours} Min:{minutes} Sec:{seconds}");            
             sunNotice.AppendLine($"Civil Twilight Begins at { sunInfo.Civil_twilight_begin.ToLocalTime().ToLongTimeString()}");
             sunNotice.AppendLine($"Civil Twilight Ends at { sunInfo.Civil_twilight_end.ToLocalTime().ToLongTimeString()}");
             sunNotice.AppendLine($"Nautical Twilight Begins at { sunInfo.Nautical_twilight_begin.ToLocalTime().ToLongTimeString()}");

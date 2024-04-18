@@ -25,7 +25,7 @@ namespace SunInfo
         public DateTime Sunrise { get; set; }
         public DateTime Sunset { get; set; }
         public DateTime Solar_noon { get; set; }
-        public DateTime Day_length { get; set; }
+        public String Day_length { get; set; }
         public DateTime Civil_twilight_begin { get; set; }
         public DateTime Civil_twilight_end { get; set; }
         public DateTime Nautical_twilight_begin { get; set; }
