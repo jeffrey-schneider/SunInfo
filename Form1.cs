@@ -108,10 +108,17 @@ namespace SunInfo
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                DialogResult result = MessageBox.Show("Do you really want to exit?", "Dialog Title", MessageBoxButtons.YesNo);
+                string message = "Are you sure you want to exit?";
+                string caption = "SunInfo Exit";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+                result = MessageBox.Show(this,
+                    message, caption, 
+                    buttons,
+                    MessageBoxIcon.Stop );
                 if (result == DialogResult.Yes)
                 {
-                    Application.Exit();
+                    Application.Exit();                    
                 }
                 else
                 {
