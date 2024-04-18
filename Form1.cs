@@ -31,9 +31,11 @@ namespace SunInfo
             cities.Add(new City("Berlin", "Germany", 52.520008, 13.404954));
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            
-            BindingSource bs = new BindingSource();
-            bs.DataSource = typeof(City);
+
+            BindingSource bs = new BindingSource
+            {
+                DataSource = typeof(City)
+            };
             foreach (City city in cities)
             {
                 bs.Add(city);
@@ -42,48 +44,39 @@ namespace SunInfo
             dataGridView1.AutoGenerateColumns = true;
         }
 
-        private async void btnSubmit_Click(object sender, EventArgs e)
+        private async void BtnSubmit_Click(object sender, EventArgs e)
         {
             var sunInfo = await SunProcessor.LoadSunInformation();           
-            txtSunRise.Text = displayInformation(sunInfo);           
+            txtSunRise.Text = DisplayInformation(sunInfo);           
         }
 
-        private async void button1_ClickAsync(object sender, EventArgs e)
+        private async void Button1_ClickAsync(object sender, EventArgs e)
         {
             double latitude = 35.045631;
             double longitude = -85.309677;
              //MessageBox.Show("The selected value is " + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"));            
             String aDate = dateTimePicker1.Value.Date.ToString("yyyy-MM-dd");
             var sunInfo = await SunProcessor.LoadSunInformation(latitude, longitude, aDate);
-            txtBox02.Text = displayInformation(sunInfo);
+            txtBox02.Text = DisplayInformation(sunInfo);
         }
 
-        private static String displayInformation(SunModel sunInfo)
+        private static String DisplayInformation(SunModel sunInfo)
         {
             StringBuilder sunNotice = new StringBuilder();            
-            sunNotice.Append($"Sunrise is at { sunInfo.Sunrise.ToLocalTime().ToLongTimeString() }");
-            sunNotice.Append(Environment.NewLine);
-            sunNotice.Append($"Sunset is at { sunInfo.Sunset.ToLocalTime().ToLongTimeString()}");
-            sunNotice.Append(Environment.NewLine);
-            sunNotice.Append($"Solar Noon is at { sunInfo.solar_noon.ToLocalTime().ToLongTimeString()}");
-            sunNotice.Append(Environment.NewLine);
-            sunNotice.Append($"Day Length is at { sunInfo.day_length.ToLocalTime().ToLongTimeString()}");
-            sunNotice.Append(Environment.NewLine);
-            sunNotice.Append($"Civil Twilight Begins at { sunInfo.civil_twilight_begin.ToLocalTime().ToLongTimeString()}");
-            sunNotice.Append(Environment.NewLine);
-            sunNotice.Append($"Civil Twilight Ends at { sunInfo.civil_twilight_end.ToLocalTime().ToLongTimeString()}");
-            sunNotice.Append(Environment.NewLine);
-            sunNotice.Append($"Nautical Twilight Begins at { sunInfo.nautical_twilight_begin.ToLocalTime().ToLongTimeString()}");
-            sunNotice.Append(Environment.NewLine);
-            sunNotice.Append($"Nautical Twilight Ends at { sunInfo.nautical_twilight_end.ToLocalTime().ToLongTimeString()}");
-            sunNotice.Append(Environment.NewLine);
-            sunNotice.Append($"Astronomical Twilight Begins at { sunInfo.astronomical_twilight_begin.ToLocalTime().ToLongTimeString()}");
-            sunNotice.Append(Environment.NewLine);
-            sunNotice.Append($"Astronomical Twilight Ends at { sunInfo.astronomical_twilight_end.ToLocalTime().ToLongTimeString()}");
+            sunNotice.AppendLine($"Sunrise is at { sunInfo.Sunrise.ToLocalTime().ToLongTimeString() }");
+            sunNotice.AppendLine($"Sunset is at { sunInfo.Sunset.ToLocalTime().ToLongTimeString()}");
+            sunNotice.AppendLine($"Solar Noon is at { sunInfo.Solar_noon.ToLocalTime().ToLongTimeString()}");
+            sunNotice.AppendLine($"Day Length is at { sunInfo.Day_length.ToLocalTime().ToLongTimeString()}");
+            sunNotice.AppendLine($"Civil Twilight Begins at { sunInfo.Civil_twilight_begin.ToLocalTime().ToLongTimeString()}");
+            sunNotice.AppendLine($"Civil Twilight Ends at { sunInfo.Civil_twilight_end.ToLocalTime().ToLongTimeString()}");
+            sunNotice.AppendLine($"Nautical Twilight Begins at { sunInfo.Nautical_twilight_begin.ToLocalTime().ToLongTimeString()}");
+            sunNotice.AppendLine($"Nautical Twilight Ends at { sunInfo.Nautical_twilight_end.ToLocalTime().ToLongTimeString()}");
+            sunNotice.AppendLine($"Astronomical Twilight Begins at { sunInfo.Astronomical_twilight_begin.ToLocalTime().ToLongTimeString()}");
+            sunNotice.AppendLine($"Astronomical Twilight Ends at { sunInfo.Astronomical_twilight_end.ToLocalTime().ToLongTimeString()}");
             return sunNotice.ToString();
         }
 
-        private async void btnSubmitPlace_ClickAsync(object sender, EventArgs e)
+        private async void BtnSubmitPlace_ClickAsync(object sender, EventArgs e)
         {
             Int32 selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
             StringBuilder sb = new StringBuilder();
@@ -101,27 +94,33 @@ namespace SunInfo
                 }
                 String aDate = dateTimePicker1.Value.Date.ToString("yyyy-MM-dd");
                 var sunInfo = await SunProcessor.LoadSunInformation(latitude, longitude, aDate);
-                txtBox03.Text = displayInformation(sunInfo);
-                //MessageBox.Show(sb.ToString());
+                txtBox03.Text = DisplayInformation(sunInfo);
             }
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Exit application?", "", MessageBoxButtons.YesNo) ==
-      DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            this.Close(); 
         }
 
     
         public void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Exit application?", "", MessageBoxButtons.YesNo) ==
-      DialogResult.Yes)
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                Application.Exit();
+                DialogResult result = MessageBox.Show("Do you really want to exit?", "Dialog Title", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                e.Cancel = true;
             }
         }
 
