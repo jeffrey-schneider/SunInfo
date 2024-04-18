@@ -8,25 +8,25 @@ namespace SunInfo
         {
         }
 
-        public City(string city, double latitude, double longitude)
+        public City(string cityName, double latitude, double longitude)
         {
-            this.city = city;
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.CityName = cityName;
+            this.Latitude = latitude;
+            this.Longitude = longitude;
         }
 
-        public City(string city, string state, double latitude, double longitude)
+        public City(string cityName, string state, double latitude, double longitude)
         {
-            this.city = city;
-            this.state = state;
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.CityName = cityName;
+            this.State = state;
+            this.Latitude = latitude;
+            this.Longitude = longitude;
         }
 
-        public String city { get; set; }     
-        public String state { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
+        public String CityName { get; set; }     
+        public String State { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
     }
 

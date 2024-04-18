@@ -39,22 +39,19 @@ namespace SunInfo
             this.btnSubmitPlace = new System.Windows.Forms.Button();
             this.txtBox03 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.latitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.longitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.cityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cityBindingSource1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cityBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cityBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +64,7 @@ namespace SunInfo
             this.btnSubmit.TabIndex = 0;
             this.btnSubmit.Text = "&Submit Today";
             this.btnSubmit.UseVisualStyleBackColor = true;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            this.btnSubmit.Click += new System.EventHandler(this.BtnSubmit_Click);
             // 
             // txtSunRise
             // 
@@ -108,7 +105,7 @@ namespace SunInfo
             this.btnSubmitDate.TabIndex = 4;
             this.btnSubmitDate.Text = "Submit &Date";
             this.btnSubmitDate.UseVisualStyleBackColor = true;
-            this.btnSubmitDate.Click += new System.EventHandler(this.button1_ClickAsync);
+            this.btnSubmitDate.Click += new System.EventHandler(this.Button1_ClickAsync);
             // 
             // btnSubmitPlace
             // 
@@ -117,9 +114,9 @@ namespace SunInfo
             this.btnSubmitPlace.Name = "btnSubmitPlace";
             this.btnSubmitPlace.Size = new System.Drawing.Size(173, 59);
             this.btnSubmitPlace.TabIndex = 7;
-            this.btnSubmitPlace.Text = "Submit &Place";
+            this.btnSubmitPlace.Text = "Submit &Place &&  Date\r\n";
             this.btnSubmitPlace.UseVisualStyleBackColor = true;
-            this.btnSubmitPlace.Click += new System.EventHandler(this.btnSubmitPlace_ClickAsync);
+            this.btnSubmitPlace.Click += new System.EventHandler(this.BtnSubmitPlace_ClickAsync);
             // 
             // txtBox03
             // 
@@ -137,10 +134,7 @@ namespace SunInfo
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cityDataGridViewTextBoxColumn,
-            this.stateDataGridViewTextBoxColumn,
-            this.latitudeDataGridViewTextBoxColumn,
-            this.longitudeDataGridViewTextBoxColumn});
+            this.cityDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.cityBindingSource1;
             this.dataGridView1.Location = new System.Drawing.Point(802, 35);
             this.dataGridView1.MultiSelect = false;
@@ -148,6 +142,17 @@ namespace SunInfo
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(458, 158);
             this.dataGridView1.TabIndex = 8;
+            // 
+            // cityDataGridViewTextBoxColumn
+            // 
+            this.cityDataGridViewTextBoxColumn.DataPropertyName = "CityName";
+            this.cityDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.cityDataGridViewTextBoxColumn.Name = "cityDataGridViewTextBoxColumn";
+            this.cityDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cityBindingSource1
+            // 
+            this.cityBindingSource1.DataSource = typeof(SunInfo.City);
             // 
             // label1
             // 
@@ -182,7 +187,7 @@ namespace SunInfo
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
@@ -203,38 +208,6 @@ namespace SunInfo
             this.label2.Size = new System.Drawing.Size(241, 16);
             this.label2.TabIndex = 12;
             this.label2.Text = "Photo by Tomas Anunziata from Pexels";
-            // 
-            // cityDataGridViewTextBoxColumn
-            // 
-            this.cityDataGridViewTextBoxColumn.DataPropertyName = "city";
-            this.cityDataGridViewTextBoxColumn.HeaderText = "city";
-            this.cityDataGridViewTextBoxColumn.Name = "cityDataGridViewTextBoxColumn";
-            this.cityDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // stateDataGridViewTextBoxColumn
-            // 
-            this.stateDataGridViewTextBoxColumn.DataPropertyName = "state";
-            this.stateDataGridViewTextBoxColumn.HeaderText = "state";
-            this.stateDataGridViewTextBoxColumn.Name = "stateDataGridViewTextBoxColumn";
-            this.stateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // latitudeDataGridViewTextBoxColumn
-            // 
-            this.latitudeDataGridViewTextBoxColumn.DataPropertyName = "latitude";
-            this.latitudeDataGridViewTextBoxColumn.HeaderText = "latitude";
-            this.latitudeDataGridViewTextBoxColumn.Name = "latitudeDataGridViewTextBoxColumn";
-            this.latitudeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // longitudeDataGridViewTextBoxColumn
-            // 
-            this.longitudeDataGridViewTextBoxColumn.DataPropertyName = "longitude";
-            this.longitudeDataGridViewTextBoxColumn.HeaderText = "longitude";
-            this.longitudeDataGridViewTextBoxColumn.Name = "longitudeDataGridViewTextBoxColumn";
-            this.longitudeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cityBindingSource1
-            // 
-            this.cityBindingSource1.DataSource = typeof(SunInfo.City);
             // 
             // cityBindingSource
             // 
@@ -263,10 +236,10 @@ namespace SunInfo
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cityBindingSource1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cityBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cityBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
